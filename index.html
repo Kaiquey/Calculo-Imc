@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calcular Peso</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+      <h1><span class="imc"></span></h1>
+      <div class="container">
+          <div class="primeira-parte">
+        <p>Clique para Iniciar a experiência!</p>
+        <hr />
+        <button onclick="go(1,2)">Iniciar</button>
+      </div>
+      <div class="segunda-parte">
+        <h3>Calculadora IMC</h3>
+        <hr />
+        <label for="text">Digite seu peso:</label>
+        <input type="number" placeholder="Peso:" id="peso" />
+        <br /><br />
+        <label for="altura">Digite sua altura</label>
+        <input type="number" placeholder="Altura" id="altura" />
+        <br /> <br/>
+        <button onclick="validacao()">Calcular</button>
+      </div>
+      <div class="final">
+        <h3>Resultado!</h3>
+        <p id="resultado"></p>
+        <button onclick="go(3,2)">Calcular Novamente!</button>
+        <button onclick="go(3,1)">Finalizar</button>
+      </div>
+    </div>
+    <!-- Animação -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <!-- Fim -->
+
+    <!-- Lógica do cálculo  -->
+    <script>
+      // Animação
+      var text = new Typed(".imc", {
+        strings: ["Bem Vindo", "Calculo do IMC"],
+        typeSpeed: 100,
+        backSpeed: 60,
+        loop: true,
+      });
+
+      // Acima é apenas um extra para diferenciar a gosto
+
+      // Abaixo toda a operação do calculo do IMC
+      const primeiraDiv = document.querySelector(".primeira-parte");
+      const segundaDiv = document.querySelector(".segunda-parte");
+      const finalDiv = document.querySelector(".final");
+
+      // Função que é somente para bloquear e liberar campos
+      function go(currentStep, nextStep) {
+        let dNone, dBlock;
+
+        // Verificar
+        if (currentStep == 1) {
+          dNone = primeiraDiv;
+        } else if (currentStep == 2) {
+          dNone = segundaDiv;
+        } else {
+          dNone = finalDiv;
+        }
+        dNone.style.display = "none";
+        if (nextStep == 1) {
+          dBlock = primeiraDiv;
+        } else if (nextStep == 2) {
+          dBlock = segundaDiv;
+        } else {
+          dBlock = finalDiv;
+        }
+        dBlock.style.display = "block";
+      }
+
+      function validacao() {
+        const peso = document.getElementById("peso");
+        const altura = document.getElementById("altura");
+        peso.style.border = "none";
+        altura.style.bborder = "none";
+        if (!peso.value || !altura.value) {
+          if (!peso.value && !altura.value) {
+            peso.style.border = "1px solid red";
+            altura.style.border = "1px solid red";
+          } else if (!peso.value) {
+            peso.style.border = "1px solid red";
+          } else {
+            altura.style.border = "1px solid red";
+          }
+        } else {
+          let imc = peso.value / (altura.value * altura.value);
+          const result = document.getElementById("resultado");
+          if (imc < 18.5) {
+            // console.log('Magreza | Obesidade: 0')
+            result.style.color = "yellow";
+            result.innerHTML = "Magreza | Obesidade: 0";
+          } else if (imc >= 18.5 && imc < 25) {
+            result.style.color = "green";
+            // console.log('Normal | Obesidade: 0')
+            result.innerHTML = "Normal | Obesidade: 0";
+          } else if (imc >= 25 && imc < 30) {
+            // console.log('Sobrepeso | Obesidade: I')
+            result.style.color = "yellow";
+            result.innerHTML = "Sobrepeso | Obesidade: I";
+          } else if (imc >= 30 && imc < 40) {
+            // console.log('Obesidade | Obesidade: II')
+            result.style.color = "orangered";
+            result.innerHTML = "Obesidade | Obesidade: II";
+          } else {
+            result.style.color = "red";
+            // console.log('Obesidade grave!! | Obesidade: III')
+            result.innerHTML = "Obesidade Grave!! | Obesidade: III";
+          }
+          go(2, 3);
+        }
+      }
+    </script>
+  </body>
+</html>
