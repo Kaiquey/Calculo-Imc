@@ -33,13 +33,13 @@
         <button onclick="go(3,1)">Finalizar</button>
       </div>
     </div>
-    <!-- Animação -->
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-    <!-- Fim -->
+   
 
-    <!-- Lógica do cálculo  -->
+  
     <script>
-      // Animação
+    
       var text = new Typed(".imc", {
         strings: ["Bem Vindo", "Calculo do IMC"],
         typeSpeed: 100,
@@ -47,18 +47,16 @@
         loop: true,
       });
 
-      // Acima é apenas um extra para diferenciar a gosto
-
-      // Abaixo toda a operação do calculo do IMC
+     
       const primeiraDiv = document.querySelector(".primeira-parte");
       const segundaDiv = document.querySelector(".segunda-parte");
       const finalDiv = document.querySelector(".final");
 
-      // Função que é somente para bloquear e liberar campos
+     
       function go(currentStep, nextStep) {
         let dNone, dBlock;
 
-        // Verificar
+       
         if (currentStep == 1) {
           dNone = primeiraDiv;
         } else if (currentStep == 2) {
@@ -95,24 +93,24 @@
           let imc = peso.value / (altura.value * altura.value);
           const result = document.getElementById("resultado");
           if (imc < 18.5) {
-            // console.log('Magreza | Obesidade: 0')
+          
             result.style.color = "yellow";
             result.innerHTML = "Magreza | Obesidade: 0";
           } else if (imc >= 18.5 && imc < 25) {
             result.style.color = "green";
-            // console.log('Normal | Obesidade: 0')
+          
             result.innerHTML = "Normal | Obesidade: 0";
           } else if (imc >= 25 && imc < 30) {
-            // console.log('Sobrepeso | Obesidade: I')
+           
             result.style.color = "yellow";
             result.innerHTML = "Sobrepeso | Obesidade: I";
           } else if (imc >= 30 && imc < 40) {
-            // console.log('Obesidade | Obesidade: II')
+          
             result.style.color = "orangered";
             result.innerHTML = "Obesidade | Obesidade: II";
           } else {
             result.style.color = "red";
-            // console.log('Obesidade grave!! | Obesidade: III')
+          
             result.innerHTML = "Obesidade Grave!! | Obesidade: III";
           }
           go(2, 3);
